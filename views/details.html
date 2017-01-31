@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Details - Merchant Portal </title>
+  <link rel="shortcut icon" href=""/>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet" >
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../styles/details.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+    <script src="../scripts/dirPagination.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="../scripts/app.js"></script>
+    <script language="javascript">
+
+  
+      
+    </script> 
+</head>
+<body ng-app="merchantPortalApp" >
+
+  <div ng-controller="detailsController" id="detailsController" class="content">
+
+      <!-- Main Nav Dropdown Structure -->
+      <ul id="dropdown-settings" class="dropdown-content">
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Administration</a></li>
+          <li class="divider"></li>
+          <li><a href="login.html">Log Off</a></li>
+      </ul> <!-- End Main Nav Dropdown Structure -->
+      <!-- Main Nav -->
+      <nav class="row blue-grey lighten-1">
+          <div class="nav-wrapper main">
+              <a href="#!" class="brand-logo">Merchant Portal</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+
+
+                  <!-- Dropdown Trigger -->
+                  <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-constrainwidth="false" data-activates="dropdown-settings">Tony<i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+
+                  <li><a href="#">My Account</a></li>
+                  <li><a href="#">Administration</a></li>
+                  <li class="divider"></li>
+                  <li><a href="login.html">Log Off</a></li>
+              </ul>
+          </div>
+      </nav> <!-- End Main Nav -->
+
+    <!-- Content -->
+    <main class="order-details container">
+      <!-- Page Controls -->
+      <div class="row">
+        <a class="waves-effect waves-light btn" ng-click="close()"><i class="material-icons left">arrow_back</i>Close</a>
+        <a class="waves-effect waves-light btn"><i class="material-icons right">file_download</i>Download</a>
+      </div> <!-- End Page Controls -->
+      <!-- Order Details -->
+        <div class="card-panel">
+            <h5>User Info:</h5>
+            <ul>
+                <li>
+                    <strong>Name: &nbsp;</strong>
+                    <p>{{selectedOrder.customerName}}</p>
+                </li>
+                <li>
+                    <strong>Date: &nbsp;</strong>
+                    <p>{{selectedOrder.date | date:'yyyy/MM/dd'}}</p>
+                </li> 
+            </ul>
+            <br/>
+            <br/>
+            <br/>
+            <h5>Account Info:
+            </h5>
+            <ul><li>
+                    <strong>Credit Card #: &nbsp;</strong>
+                    <p>{{selectedOrder.credit}}</p>
+                    
+                </li>
+                
+                <li>
+                    <strong>Expiry Date: &nbsp;</strong>
+                    <p>{{selectedOrder.expiry}}</p>
+                </li>
+                <li>
+                    <strong>Credit Card Type: &nbsp;</strong>
+                    <p>{{selectedOrder.type}}</p>
+                </li>
+                <li>
+                    
+                    <strong>Secure Track #: &nbsp;</strong>
+                    <p>{{selectedOrder.trackId}}</p>
+                </li>
+            </ul>
+            <br><br><br>
+
+            <h5>Address:</h5>
+            <ul>
+                <li>
+                    <strong>Address Line1: &nbsp;</strong>
+                    <p>{{selectedOrder.address}}</p>
+                </li>
+                <li>
+                    <strong>City: </strong>
+                    <p>{{selectedOrder.city}}, {{selectedOrder.province}}</p>
+                </li>
+                <li>
+                    <strong>Postal Code: &nbsp;</strong>
+                    <p>{{selectedOrder.postalCode}}</p>
+                </li>
+            </ul>
+        </div> <!-- End Order Details -->
+      
+        
+        </footer>
+    </main> <!-- End Content -->
+
+  </div>
+    <footer class="footer">
+
+    
+        <div class="container copy">
+            © 2017 DH MerchantPortal&emsp;&emsp;
+            All User Information are confidential and for official use only
+        </div>
+    
+        </footer>
+</body>
+</html>

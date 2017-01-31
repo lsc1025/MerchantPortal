@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Merchant Portal</title>
+    <link rel="shortcut icon" href="" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../styles/admin.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+    <script src="../scripts/dirPagination.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="../scripts/app.js"></script>
+</head>
+
+
+<body ng-app="merchantPortalApp">
+
+    <div ng-controller="ordersController" id="adminController" class="content">
+
+        <!-- Main Nav Dropdown Structure -->
+        <ul id="dropdown-settings" class="dropdown-content">
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Administration</a></li>
+            <li class="divider"></li>
+            <li><a href="login.html">Log Off</a></li>
+        </ul> <!-- End Main Nav Dropdown Structure -->
+        <!-- Main Nav -->
+        <nav class="row blue-grey lighten-1">
+            <div class="nav-wrapper main">
+                <a href="#" class="brand-logo">D<span style="color: red">+</span>H Merchant Portal</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+
+
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-button" href="#" data-beloworigin="true" data-constrainwidth="false" data-activates="dropdown-settings">Admin<i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Administration</a></li>
+                    <li class="divider"></li>
+                    <li><a href="login.html">Log Off</a></li>
+                </ul>
+            </div>
+        </nav> <!-- End Main Nav -->
+        <!-- Side Nav -->
+        <ul id="slide-out" class="side-nav fixed">
+            <li class="side-nav-title"><a class="side-nav-title">Management</a></li>
+            <li><a href="admin.html">Order Access Log</a></li>
+            <li><a href="admin-aal.html" style="background-color: rgb(214, 214, 214);">Account Access Log</a></li>
+            <li><a href="admin-mu.html">Manage Accounts</a></li>
+            <li class="divider"></li>
+            <li class="side-nav-title"><a class="side-nav-title" href="#">Reports</a></li>
+            <li><a href="#">Weekly Report</a></li>
+        </ul>
+
+        <!-- End Side Nav -->
+
+        <main class="main">
+            <!-- Table Search -->
+            <form class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">search</i>
+                    <input id="search_table" type="text" ng-model="searchOrders">
+                    <label for="search_table">Search</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">date_range</i>
+                    <input id="selectedDate" name="selectedDate" type="text" class="datepicker" ng-model="selectedDate" ng-change="chooseDate(selectedDate)" materialize-date-picker />
+                    <label ng-class="{active: selectedDate.length}" for="selectedDate">Select Date</label>
+                </div>
+            </form>
+
+            <!-- Table -->
+            <div class="card-panel order-table">
+                <table class="responsive-table highlight">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a href="#" ng-click="sortBy = 'by'; sortReverse = !sortReverse">
+                                    Account
+                                    <i ng-show="sortBy == 'by' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                    <i ng-show="sortBy == 'by' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                </a>
+                            <th>
+                                <a href="#" ng-click="sortBy = 'ip'; sortReverse = !sortReverse">
+                                    IP Address
+                                    <i ng-show="sortBy == 'ip' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                    <i ng-show="sortBy == 'ip' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                </a>
+
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortBy = 'trackId'; sortReverse = !sortReverse">
+                                    Session Start Time
+                                    <i ng-show="sortBy == 'trackId' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                    <i ng-show="sortBy == 'trackId' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortBy = 'customerName'; sortReverse = !sortReverse">
+                                    Session End Time
+                                    <i ng-show="sortBy == 'customerName' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                    <i ng-show="sortBy == 'customerName' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortBy = 'time'; sortReverse = !sortReverse">
+                                    Platform
+                                    <i ng-show="sortBy == 'time' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                    <i ng-show="sortBy == 'time' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="entry in accountLog | orderBy:sortBy:sortReverse | filter:searchOrders | filterDate:selectedDate">
+                            <td>{{entry.by}}</td>
+                            <td>{{entry.ip}}</td>
+                            <td>{{entry.timeOn | date:"yyyy/MM/dd hh:mm a"}}</td>
+                            <td>{{entry.timeOff | date:"yyyy/MM/dd hh:mm a"}}</td>
+                            <td>{{entry.platfrom}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> <!-- End Table -->
+
+        </main>
+
+
+
+    </div>
+    <footer class="footer">
+
+        <div class="copy">
+            <div class="main">
+                © 2017 DH MerchantPortal
+
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Merchant Portal</title>
+  <link rel="shortcut icon" href=""/>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet" >
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../styles/orders.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="../scripts/app.js"></script>
+</head>
+<body ng-app="merchantPortalApp">
+
+  <div ng-controller="ordersController" id="ordersController">
+
+    <!-- Main Nav Dropdown Structure -->
+    <ul id="dropdown-settings" class="dropdown-content">
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">Administration</a></li>
+        <li class="divider"></li>
+        <li><a href="login.html">Log Off</a></li>
+    </ul> <!-- End Main Nav Dropdown Structure -->
+      
+      <!-- Main Nav -->
+    <nav class="row blue-grey lighten-1">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">Merchant Portal</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#" ng-click="search=true"><i class="material-icons">search</i></a></li>
+            
+            <!-- Dropdown Trigger -->
+          <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-constrainwidth="false" data-activates="dropdown-settings">Tony<i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li class="side-nav-search"><a href="#" ng-click="search=true"><i class="material-icons">search</i></a></li>
+          <li class="divider"></li>
+          <li class="side-nav-title"><a class="side-nav-title" href="#!">Orders</a></li>
+          <li><a href="#!">New</a></li>
+          <li><a href="#!">Pending</a></li>
+          <li><a href="#!">Rejected</a></li>
+          <li><a href="#!">Accepted</a></li>
+          <li><a href="#!">Downloaded</a></li>
+          <li class="side-nav-title"><a class="side-nav-title" href="#!">Reports</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">Account</a></li>
+          <li><a href="#!">Settings</a></li>
+          <li><a href="#!">User Permissions</a></li>
+        </ul>
+      </div>
+    </nav> <!-- End Main Nav -->
+
+    <!-- Side Nav -->
+    <!--<ul id="slide-out" class="side-nav fixed">
+      <li class="side-nav-title"><a class="side-nav-title" href="orders.html">Orders</a></li>
+      <li><a href="#!">New<span class="new badge">2</span></a></li>
+      <li><a href="pending.html">Pending<span class="new badge">{{countPending}}</span></a></li>
+      <li><a href="rejected.html">Rejected<span class="badge">{{countRejected}}</span></a></li>
+      <li><a href="accepted.html">Accepted<span class="badge">{{countAccepted}}</span></a></li>
+      <li><a href="#!">Downloaded<span class="badge">3</span></a></li>
+      <li class="divider"></li>
+      <li class="side-nav-title"><a class="side-nav-title" href="#!">Reports</a></li>
+    </ul>--> <!-- End Side Nav -->
+
+    <!-- Content -->
+      <main>
+          <div class="main">
+              
+              <section id="left">
+
+
+                  <!-- Table Search -->
+                  <form class="row">
+                      <div class="input-field col s2">
+                          <i class="material-icons prefix">search</i>
+                          <input id="search_table" type="text" ng-model="searchOrdersFilter" >
+                          <label for="search_table">Search for Name and Order #</label>
+                      </div>
+                      <div class="input-field col s2">
+                          <i class="material-icons prefix">date_range</i>
+                          <input id="selectedDate" name="selectedDate" type="text" class="datepicker" ng-model="selectedDate" ng-change="chooseDate(selectedDate)" materialize-date-picker />
+                          <label ng-class="{active: selectedDate.length}" for="selectedDate">Select Date</label>
+                      </div>
+                      
+                      <ul class="pagination align-right">
+                          {{selectedRange}} / {{orderSize}}
+                          <li class="{{prevatt}} leftbtn"><a href="#" ng-click="prev()"><i class="material-icons">chevron_left</i></a></li>
+                          <li class="{{nextatt}}"><a href="#" ng-click="next()"><i class="material-icons">chevron_right</i></a></li>
+                      </ul>
+
+                  </form>
+
+
+
+                  <!-- Table -->
+                  <div class="card-panel order-table">
+                      <table class="responsive-table highlight">
+                          <thead>
+                              <tr>
+                                  <th class="selector"><input type="checkbox" ng-model="bool" ng-change="selectAll(bool)" id="selectAll"><label for="selectAll"></label></th>
+                                  <th class="status">
+                                      <a href="#" ng-click="sortBy = 'status'; sortReverse = !sortReverse">
+                                          Status
+                                          <i ng-show="sortBy == 'status' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                          <i ng-show="sortBy == 'status' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                      </a>
+                                  </th>
+                                  <th class="number">
+                                      <a href="#" ng-click="sortBy = 'trackId'; sortReverse = !sortReverse">
+                                          Order Number
+                                          <i ng-show="sortBy == 'trackId' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                          <i ng-show="sortBy == 'trackId' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                      </a>
+                                  </th>
+                                  <th class="name">
+                                      <a href="#" ng-click="sortBy = 'customerName'; sortReverse = !sortReverse">
+                                          Customer Name
+                                          <i ng-show="sortBy == 'customerName' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                          <i ng-show="sortBy == 'customerName' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                      </a>
+                                  </th>
+                                  <th class="date">
+                                      <a href="#" ng-click="sortBy = 'date'; sortReverse = !sortReverse">
+                                          Order Date
+                                          <i ng-show="sortBy == 'date' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                          <i ng-show="sortBy == 'date' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                      </a>
+                                  </th>
+                                  
+                                  <th class="type">
+                                      <a href="#" ng-click="sortBy = 'orderType'; sortReverse = !sortReverse">
+                                          Order Type
+                                          <i ng-show="sortBy == 'orderType' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                          <i ng-show="sortBy == 'orderType' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                      </a>
+                                  </th></tr>
+                          </thead>
+
+                          <tbody ng-model="table" ng-change="pageChanged()">
+                              <tr ng-repeat="order in (filteredOrders = (orders | orderBy:sortBy:sortReverse | filter:searchOrdersFilter | filterDate:selectedDate))">
+                                  <td class="selector"><input type="checkbox" ng-model="order.selected" id="{{order.trackId}}"><label for="{{order.trackId}}"></label></td>
+                                  <td ng-click="showDetails(order.trackId)"><span class="new badge left" ng-class="{grey: order.status=='Pending', red: order.status=='Rejected', green: order.status=='Accepted'}" data-badge-caption="">{{order.status}}</span></td>
+                                  <td ng-click="showDetails(order.trackId)">{{order.trackId}}</td>
+                                  <td ng-click="showDetails(order.trackId)">{{order.customerName}}</td>
+                                  <td ng-click="showDetails(order.trackId)">{{order.date | date:"yyyy/MM/dd"}}</td>
+                                  <td ng-click="showDetails(order.trackId)">{{order.orderType}}</td>
+                              </tr>
+                          </tbody>
+
+
+
+                      </table>
+                  </div> <!-- End Table -->
+
+                  <div class="table-actions" ng-show="ifSelected()">
+                      <a class="waves-effect waves-light btn"><i class="material-icons right">file_download</i>Download</a>
+                      <a class="waves-effect waves-light btn green" ng-click="acceptSelected()"><i class="material-icons right">thumb_up</i>Accept</a>
+                      <a class="waves-effect waves-light btn red" ng-click="rejectSelected()"><i class="material-icons right">block</i>Reject</a>
+                  </div>
+
+                  <ul class="pagination align-right">
+                      {{selectedRange}} / {{orderSize}}
+                      <li class="{{prevatt}} leftbtn"><a href="#" ng-click="prev()"><i class="material-icons">chevron_left</i></a></li>
+                      <li class="{{nextatt}}"><a href="#" ng-click="next()"><i class="material-icons">chevron_right</i></a></li>
+                  </ul>
+              </section>     
+              
+              <section id="right">
+                  
+                  
+                  
+                  
+                  
+
+              </section>
+              
+          </div>
+          
+      </main> <!-- End Content -->
+
+  </div>
+
+</body>
+</html>

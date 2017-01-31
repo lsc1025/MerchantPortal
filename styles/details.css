@@ -1,0 +1,49 @@
+body {
+	margin: 0;
+	padding: 0;
+    font-size: 1.2em;
+}
+
+.align-right {
+	float: right;
+}
+
+.card-panel {
+    min-height: 450px!important;
+}
+
+
+.brand-logo {
+	margin-left: 30px;
+}
+.dropdown-button {
+	margin-right: 30px;
+}
+
+.primary-nav {
+     display: none;
+}
+
+.main {
+    margin: 0 5%;
+    width: 90%;
+}
+
+li {
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+.content {
+  min-height: calc(100vh - 60px);
+}
+.footer {
+  height: 46px;
+}
+
+.copy {
+    position: relative;
+    top: 20%;
+    color: cadetblue;
+    
+}

@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Merchant Portal</title>
+  <link rel="shortcut icon" href=""/>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet" >
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../styles/orders.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+    <script src="../scripts/dirPagination.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="../scripts/app.js"></script>
+</head>
+<body ng-app="merchantPortalApp">
+
+  <div ng-controller="ordersController" id="ordersController" class="content">
+
+    <!-- Main Nav Dropdown Structure -->
+    <ul id="dropdown-settings" class="dropdown-content">
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">Administration</a></li>
+        <li class="divider"></li>
+        <li><a href="login.html">Log Off</a></li>
+    </ul> <!-- End Main Nav Dropdown Structure -->
+      
+      <!-- Main Nav -->
+    <nav class="row blue-grey lighten-1">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">D<span style="color: red">+</span>H Merchant Portal</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          
+            
+            <!-- Dropdown Trigger -->
+          <li><a class="dropdown-button" href="#" data-beloworigin="true" data-constrainwidth="false" data-activates="dropdown-settings">{{user}}<i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Administration</a></li>
+          <li class="divider"></li>
+          <li><a href="login.html">Log Off</a></li>
+        </ul>
+      </div>
+    </nav> <!-- End Main Nav -->
+
+
+    <!-- Content -->
+      <main>
+          <div class="main">
+              
+              <section id="left">
+
+                  <!-- Table Search -->
+                  <form class="row">
+                      <div class="col s1 filterslabel"><h6>Filter By:</h6></div>
+
+                      <div class="col filters">
+
+                          <a class='dropdown-button btn {{statusColor}}' href='#' data-activates='dropdown1'><i class="material-icons right">info_outline</i> Order Status</a>
+                          <ul id='dropdown1' class='dropdown-content' ng-model="selectedStatus">
+                              <li><a href="#" ng-click="chooseStatus('Pending'); statusColor='grey'">Action Required</a></li>
+                              <li><a href="#" ng-click="chooseStatus('Accepted'); statusColor='green'">Accepted</a></li>
+                              <li><a href="#" ng-click="chooseStatus('Rejected'); statusColor='red'">Rejected</a></li>
+                              <li><a href="#" ng-click="chooseStatus(''); statusColor=''">View All</a></li>
+                          </ul>
+                      
+                          <a class='dropdown-button btn {{typeColor}}' href='#' data-activates='dropdown2'><i class="material-icons right">payment</i> Order Type</a>
+                          <ul id='dropdown2' class='dropdown-content' ng-model="selectedType">
+                              <li><a href="#" ng-click="chooseType('Credit Card'); typeColor='green'">Credit Card</a></li>
+                              <li><a href="#" ng-click="chooseType('Bank Account'); typeColor='green'">Bank Account</a></li>
+                              <li><a href="#" ng-click="chooseType(''); typeColor=''">View All</a></li>
+                          </ul>
+
+                      </div>
+                      <div class="input-field col s2">
+                          <i class="material-icons prefix">search</i>
+                          <input id="search_table" type="text" ng-model="searchOrders">
+                          <label for="search_table">Name or Order #</label>
+                      </div>
+                      <div class="input-field col s2">
+                          <i class="material-icons prefix">date_range</i>
+                          <input id="selectedDate" name="selectedDate" type="text" class="datepicker" ng-model="selectedDate" ng-change="chooseDate(selectedDate)" materialize-date-picker/>
+                          <label ng-class="{active: selectedDate.length}" for="selectedDate">Order Date</label>
+                      </div>
+                      
+                      <div class="col s1 order-para">
+                          
+                                  <select ng-model="pageSize" class="browser-default" style="width: 50px;" ng-change="">
+                                      <option value="10" selected>10</option>
+                                      <option value="20">20</option>
+                                      <option value="30">30</option>
+                                      <option value="50">50</option>
+                                  </select>
+                               
+                      </div>
+                      <h6 class="col order-para-label">orders per page</h6>
+                  </form>
+
+                  <!-- Table -->
+                  <div class="card-panel order-table">
+                      <table class="responsive-table highlight">
+                          <thead ng-show="filteredOrders.length">
+                          <tr>
+                              <th class="selector"><input type="checkbox" ng-model="bool" ng-change="selectAll(bool)" id="selectAll"><label for="selectAll"></label></th>
+                              <th class="status">
+                                  <a href="#" ng-click="sortBy = 'status'; sortReverse = !sortReverse">
+                                      Status
+                                      <!--<i ng-show="sortBy == 'status' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                      <i ng-show="sortBy == 'status' && sortReverse" class="material-icons">arrow_drop_up</i>-->
+                                  </a>
+                              </th>
+                              <th class="number">
+                                  <a href="#" ng-click="sortBy = 'trackId'; sortReverse = !sortReverse">
+                                      Order Number
+                                      <!--<i ng-show="sortBy == 'trackId' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                      <i ng-show="sortBy == 'trackId' && sortReverse" class="material-icons">arrow_drop_up</i>-->
+                                  </a>
+                              </th>
+                              <th class="name">
+                                  <a href="#" ng-click="sortBy = 'customerName'; sortReverse = !sortReverse">
+                                      Customer Name
+                                      <!--<i ng-show="sortBy == 'customerName' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                      <i ng-show="sortBy == 'customerName' && sortReverse" class="material-icons">arrow_drop_up</i>-->
+                                  </a>
+                              </th>
+                              <th class="date">
+                                  <a href="#" ng-click="sortBy = 'date'; sortReverse = !sortReverse">
+                                      Order Date
+                                      <!--<i ng-show="sortBy == 'date' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                      <i ng-show="sortBy == 'date' && sortReverse" class="material-icons">arrow_drop_up</i>-->
+                                  </a>
+                              </th>
+                                  
+                              <th class="type">
+                                  <a href="#" ng-click="sortBy = 'orderType'; sortReverse = !sortReverse">
+                                      Order Type
+                                      <!--<i ng-show="sortBy == 'orderType' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                      <i ng-show="sortBy == 'orderType' && sortReverse" class="material-icons">arrow_drop_up</i>-->
+                                  </a>
+                              </th>
+                              <th>
+                                  Actions
+                              </th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <tr dir-paginate="order in (filteredOrders = (orders | filter: searchOrders | filterDate: selectedDate | filterType: selectedType | filterStatus: selectedStatus | itemsPerPage: pageSize)) ">
+                              <td class="selector"><input type="checkbox" ng-model="order.selected" id="{{order.trackId}}"><label for="{{order.trackId}}"></label></td>
+                              <td><span class="new badge left" ng-class="{grey: order.status=='Action Required', red: order.status=='Rejected', green: order.status=='Accepted'}" data-badge-caption="">{{order.status}}</span></td>
+                              <td>{{order.trackId}}</td>
+                              <td>{{order.customerName}}</td>
+                              <td>{{order.date | date:"yyyy/MM/dd"}}</td>
+                              <td>{{order.orderType}}</td>
+                              <td class="inline-control">
+                                  <a class="btn" ng-if="!order.expanded" ng-click="showDetails(order.trackId)">Details</a>
+                                  <a class="btn green inline-btn"><i class="material-icons right">thumb_up</i>Accept</a>
+                                  <a class="waves-effect waves-light dropdown-button btn red inline-btn"  data-activates='dropdown3' data-dropup="true"><i class="material-icons right">block</i>Reject</a>
+                                  <ul id='dropdown3' class='dropdown-content'>
+                                      <li><a href="#" ng-click="rejectSelected()">Incorrect Account number</a></li>
+                                      <li><a href="#" ng-click="rejectSelected()">Unable to locate customer on file</a></li>
+                                      <li><a href="#" ng-click="rejectSelected()">Contact Biller Directly</a></li>
+                                  </ul>
+                            </td>
+                              
+                          </tr>
+                          <tr ng-show="!filteredOrders.length"><td><strong>No order matches the current set of filters</strong></td></tr>
+                          </tbody>
+
+                      </table>
+                  </div> <!-- End Table -->
+                   
+                  <div class="pagination align-right">
+
+                      <dir-pagination-controls on-page-change="pageChanged() "
+                                               style="z-index: 9999;">
+                      </dir-pagination-controls>
+                  </div>
+                  
+                  <div class="table-actions" ng-show="ifSelected()">
+                      <a class="waves-effect waves-light btn"><i class="material-icons right">file_download</i>Download</a>
+                      <a class="waves-effect waves-light btn green" ng-click="acceptSelected()"><i class="material-icons right">thumb_up</i>Accept</a>
+                      <a class="waves-effect waves-light dropdown-button btn red" ng-show="!bool" data-activates='dropdown3' data-dropup="true"><i class="material-icons right">block</i>Reject</a>
+                      <ul id='dropdown3' class='dropdown-content'>
+                          <li><a href="#"  ng-click="rejectSelected()">Incorrect Account number</a></li>
+                          <li><a href="#"  ng-click="rejectSelected()">Unable to locate customer on file</a></li>
+                          <li><a href="#"  ng-click="rejectSelected()">Contact Biller Directly</a></li>
+                          
+                      </ul>
+                  </div>
+              </section>     
+              
+              
+          </div>
+          
+          
+
+      </main> <!-- End Content -->
+      
+  </div>
+    <footer class="footer">
+
+    <div class="copy">
+        <div class="main">
+            © 2017 DH MerchantPortal
+        </div>
+    </div>
+    </footer>
+</body>
+</html>

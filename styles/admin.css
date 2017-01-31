@@ -1,0 +1,29 @@
+header, main, footer {
+  padding-left: 300px;
+}
+.side-nav {
+	margin-top: 70px;
+}
+.side-nav-title a {
+	margin: 15px auto;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+
+/* Main Nav */
+
+.brand-logo {
+	margin-left: 30px;
+}
+.dropdown-button {
+	margin-right: 30px;
+}
+
+.content {
+  min-height: calc(100vh - 60px);
+}
+.footer {
+    margin-left: 30px;
+    height: 46px;
+}

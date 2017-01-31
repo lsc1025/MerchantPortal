@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Merchant Portal</title>
+  <link rel="shortcut icon" href=""/>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet" >
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../styles/login.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="../scripts/dirPagination.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="../scripts/app.js"></script>
+</head>
+<body ng-app="merchantPortalApp">
+
+  <div class="background"></div>
+  <div class="container row" ng-controller="loginController">
+    <div class="card-panel col s6 offset-s3">
+        <h1 style="color: #94a0a0; margin-bottom: 10px;">D<span style="color: red">+</span>H</h1>
+        <h5 style="color:#94a0a0">Merchant Portal</h5>
+        <div id="err">{{errMsg}}</div>
+      <form ng-submit="loginUser(username, password, keeplogin)">
+        <div class="input-field">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate" ng-model="username" minlength="3" required autofocus>
+          <label for="icon_prefix">Username</label>
+        </div>
+          <div class="input-field">
+              <i class="material-icons prefix">lock_outline</i>
+              <input id="icon_prefix" type="password" class="validate" ng-model="password" minlength="3" required>
+              <label for="icon_prefix">Password</label>
+          </div>
+          <div class="">
+              <input id="saved" type="checkbox" ng-model="keeplogin"/>
+              <label for="saved">Keep me signed in</label>
+          </div>
+        <button class="btn waves-effect waves-light blue-grey lighten-1" type="submit" value="submit">Sign In</button>
+      </form>
+      <div class="grey-text">
+        <a href="login-reset.html">Forgot password</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
