@@ -4,18 +4,19 @@
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Merchant Portal</title>
-  <link rel="shortcut icon" href=""/>
+  <link rel="shortcut icon" href="http://www.dh.com/profiles/dh/themes/dh_theme/favicon.ico"/>
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet" >
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <link href="../styles/login.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="../scripts/dirPagination.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-  <script src="../scripts/app.js"></script>
-</head>
-<body ng-app="merchantPortalApp">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script src="../scripts/login.js"></script>
+    </head>
+<body ng-app="mpLoginApp">
 
   <div class="background"></div>
   <div class="container row" ng-controller="loginController">
@@ -26,7 +27,7 @@
       <form ng-submit="loginUser(username, password, keeplogin)">
         <div class="input-field">
           <i class="material-icons prefix">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate" ng-model="username" minlength="3" required autofocus>
+          <input id="icon_prefix" type="text" class="validate" ng-model="username" minlength="3" required>
           <label for="icon_prefix">Username</label>
         </div>
           <div class="input-field">

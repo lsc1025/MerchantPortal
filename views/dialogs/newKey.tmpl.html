@@ -1,0 +1,53 @@
+﻿<md-dialog aria-label="Import New Public Key">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Import New Public Key</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="../img/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="input-field">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input id="icon_prefix" type="text" class="validate" ng-model="username" minlength="10" required>
+                    <label for="icon_prefix">Public Key</label>
+                </div>
+                <div class="input-field">
+                     <i class="material-icons prefix">info_outline</i>
+                    
+                    
+                    
+                        <select id="key-type" class="browser-default" style="width: 100px;">
+                            <option selected class="disabled">Key Type</option>
+                            <option value="25">AES-128</option>
+                            <option value="50">AES-192</option>
+                            <option value="100">AES-256</option>
+
+                        </select>
+                    
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="icon_prefix" type="text" class="validate" ng-model="username" minlength="3" required>
+                    <label for="icon_prefix">Assign to</label>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            
+            <span flex></span>
+            <md-button ng-click="answer('not useful')">
+                Discard
+            </md-button>
+            <md-button ng-click="answer('useful')">
+                Submit
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

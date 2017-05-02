@@ -9,7 +9,9 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="../styles/admin.css" rel="stylesheet">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
@@ -19,12 +21,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script src="../scripts/scrollToEnd.js"></script>
     <script src="../scripts/app.js"></script>
+
 </head>
 
 
 <body ng-app="merchantPortalApp">
-    
-    <div ng-controller="ordersController" id="adminController" class="content">
+
+    <div ng-controller="adminController" id="adminController" class="content">
 
         <!-- Main Nav Dropdown Structure -->
         <ul id="dropdown-settings" class="dropdown-content">
@@ -53,70 +56,57 @@
                 </ul>
             </div>
         </nav> <!-- End Main Nav -->
-        
         <!-- Side Nav -->
         <ul id="slide-out" class="side-nav fixed">
             <li class="side-nav-title"><a class="side-nav-title">Management</a></li>
-            <li><a href="admin.html" style="background-color: rgb(214, 214, 214);">Order Access Log</a></li>
+            <li><a href="admin.html">Order Access Log</a></li>
             <li><a href="admin-aal.html">Account Access Log</a></li>
             <li><a href="admin-mu.html">Manage Accounts</a></li>
-            <li><a href="admin-file.html">File Encryption</a></li>
+            <li><a href="admin-file.html" style="background-color: rgb(214, 214, 214);">File Encryption</a></li>
             
         </ul>
 
         <!-- End Side Nav -->
-        
+
         <main class="main">
-            <!-- Table Search -->
-            <form class="row">
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">search</i>
-                    <input id="search_table" type="text" ng-model="searchOrders">
-                    <label for="search_table">Search</label>
-                </div>
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">date_range</i>
-                    <input id="selectedDate" name="selectedDate" type="text" class="datepicker" ng-model="selectedDate" ng-change="chooseDate(selectedDate)" materialize-date-picker />
-                    <label ng-class="{active: selectedDate.length}" for="selectedDate">Select Date</label>
-                </div>
-            </form>
-            
+
+
             <!-- Table -->
             <div class="card-panel order-table">
                 <table class="responsive-table highlight">
                     <thead>
                         <tr>
-                           <th>
-                               <a href="#" ng-click="sortBy = 'by'; sortReverse = !sortReverse">
-                                   Viewed By
-                                   <i ng-show="sortBy == 'by' && !sortReverse" class="material-icons">arrow_drop_down</i>
-                                   <i ng-show="sortBy == 'by' && sortReverse" class="material-icons">arrow_drop_up</i>
-                               </a>
-                            <th>  
+                            <th>
+                                <a href="#" ng-click="sortBy = 'by'; sortReverse = !sortReverse">
+                                    Key Type
+                                    <i ng-show="sortBy == 'by' && !sortReverse" class="material-icons">arrow_drop_down</i>
+                                    <i ng-show="sortBy == 'by' && sortReverse" class="material-icons">arrow_drop_up</i>
+                                </a>
+                            <th>
                                 <a href="#" ng-click="sortBy = 'ip'; sortReverse = !sortReverse">
-                                    IP Address
+                                    Public Key
                                     <i ng-show="sortBy == 'ip' && !sortReverse" class="material-icons">arrow_drop_down</i>
                                     <i ng-show="sortBy == 'ip' && sortReverse" class="material-icons">arrow_drop_up</i>
                                 </a>
-                               
+
                             </th>
                             <th>
                                 <a href="#" ng-click="sortBy = 'trackId'; sortReverse = !sortReverse">
-                                    Affected Order
+                                    Date Created
                                     <i ng-show="sortBy == 'trackId' && !sortReverse" class="material-icons">arrow_drop_down</i>
                                     <i ng-show="sortBy == 'trackId' && sortReverse" class="material-icons">arrow_drop_up</i>
                                 </a>
                             </th>
                             <th>
                                 <a href="#" ng-click="sortBy = 'customerName'; sortReverse = !sortReverse">
-                                    Order Name
+                                    Assigned User
                                     <i ng-show="sortBy == 'customerName' && !sortReverse" class="material-icons">arrow_drop_down</i>
                                     <i ng-show="sortBy == 'customerName' && sortReverse" class="material-icons">arrow_drop_up</i>
                                 </a>
                             </th>
                             <th>
                                 <a href="#" ng-click="sortBy = 'time'; sortReverse = !sortReverse">
-                                    Action Date
+                                    Actions
                                     <i ng-show="sortBy == 'time' && !sortReverse" class="material-icons">arrow_drop_down</i>
                                     <i ng-show="sortBy == 'time' && sortReverse" class="material-icons">arrow_drop_up</i>
                                 </a>
@@ -125,20 +115,34 @@
                     </thead>
 
                     <tbody>
-                        <tr ng-repeat="entry in orderLog | orderBy:sortBy:sortReverse | filter:searchOrders | filter:selectedDate">
-                            <td>{{entry.by}}</td>
-                            <td>{{entry.ip}}</td>
-                            <td>{{entry.trackId}}</td>
-                            <td>{{entry.customerName}}</td>
-                            <td>{{entry.time | date:"yyyy/MM/dd hh:mm a"}}</td>
+                        <tr>
+                            <td>AES-256</td>
+                            <td>BuutgwUnQfjx0Bexp4VpfS8pG5DOvLxG</td>
+                            <td>2017/02/01 10:07:22</td>
+                            <td>All Users</td>
+                            <td><a class="btn">Change</a>&emsp;<a class="btn red">Remove</a></td>
                         </tr>
+                        <tr>
+
+                            <td>AES-256</td>
+                            <td>BW7Z090CgTYm993gqeocV24xVY0O4PK9</td>
+                            <td>2017/02/01 10:17:08</td>
+                            <td>Tony</td>
+                            <td><a class="btn">Change</a>&emsp;<a class="btn red">Remove</a></td>
+                        </tr>
+                        
                     </tbody>
                 </table>
             </div> <!-- End Table -->
+
+
+            <div class="table-actions">
+                &emsp;
+                <a class="waves-effect waves-light btn" ng-click="newKey($event)"><i class="material-icons right">queue</i>new entry</a>
+                
+            </div>
             
-            </main>
-
-
+        </main>
 
     </div>
     <footer class="footer">
@@ -146,7 +150,6 @@
         <div class="copy">
             <div class="main">
                 © 2017 DH MerchantPortal
-
             </div>
         </div>
     </footer>

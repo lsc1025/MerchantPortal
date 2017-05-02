@@ -1,64 +1,20 @@
-var app = angular.module('merchantPortalApp', ['angularUtils.directives.dirPagination']);
-
-//app.config(function($locatinProvider) {
-//    $locatinProvider.html5Mode(true);
-//});
-
+var app = angular.module('merchantPortalApp', [
+    'ngMaterial',
+    'scrollToEnd'
+]);
 
 
-//app.run(function ($location, $window, $rootScope) {
-//    $window.addEventListener('message', function (e) {
-//        $rootScope.$apply(function () {
-//            $location.path("/abc");
-//            console.orderLog($location.path());
-//        });
-//    });
-//});
+app.config(function($mdThemingProvider) {
 
+    $mdThemingProvider.theme('blue-grey')
+        .primaryPalette('blue-grey');
 
-
-// User login page
-app.controller('loginController', ['$scope', '$location', function ($scope, $location) {
-			
-    //$locationProvider.html5Mode(true).hashPrefix('*');
-
-    var para = $location.url();
-
-    $scope.errMsg = "";
-
-    if (para === "/auto") {
-        $scope.errMsg = "Logged in!";
-    }
-
-    $scope.loginUser = function (username, password, keeplogin) {
-
-		if (!(username === "tony" || username === "admin") || password.length < 8) {
-		    console.log("Invalid Username");
-		    $scope.errMsg = "Invalid username / password";
-		}
-
-		else {
-
-            if (username === "admin") {
-                location.assign("admin.html");
-            } else
-		        location.assign("orders.html");
-		}
-
-    };
-
-    $scope.resetUser = function()
-    {
-        $scope
-            .errMsg = 'An email has been sent to the email address you provided with instructions.';
-    }
-
-}]);
+});
 
 // View list of orders
 app.controller('ordersController',
 [
-    '$scope', '$filter', function($scope, $filter) {
+    '$scope', '$filter', '$mdDialog', function ($scope, $filter, $mdDialog) {
 
         $scope.savedOrders = sessionStorage.getItem('orders');
         $scope.savedOrderLog = sessionStorage.getItem('orderLog');
@@ -195,6 +151,758 @@ app.controller('ordersController',
                     customerName: 'Edwina Drake',
                     date: new Date(2017, 0, 23),
                     orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
+                },
+                {
+                    selected: false,
+                    status: 'Accepted',
+                    trackId: '150411007',
+                    customerName: 'Edwina Drake',
+                    date: new Date(2017, 0, 23),
+                    orderType: 'Bank Account'
                 }
             ];
         $scope.orderLog = (sessionStorage.getItem('orderLog') !== null)
@@ -290,11 +998,28 @@ app.controller('ordersController',
         $scope.nextatt = 'waves-effect';
         $scope.orderSize = $scope.orders.length;
         $scope.pageNum = 1;
-        $scope.pageSize = 10;
+        $scope.pageSize = 20;
+        $scope.orderIndex = $scope.pageSize;
+        $scope.currentOrders = [];
+        $scope.loaded = false;
+        $scope.side = [];
+        $scope.countPending = 0;
 
+        $scope.side[3] = 'background-color: #E0E0E0';
+        $scope.side[5] = 'background-color: #E0E0E0';
+        $scope.side[8] = 'background-color: #E0E0E0';
+
+        if ($scope.pageSize > $scope.orderSize) {
+            $scope.currentOrders = $scope.orders;
+            $scope.loaded = true;
+        } else {
+            for (var i = 0; i < $scope.pageSize; i++) {
+                $scope.currentOrders.push($scope.orders[i]);
+            }
+        }
         
-        // functions
         
+        // functions        
         $scope.clearOrders = function() {
             var oldOrders = $scope.orders;
             $scope.orders = [];
@@ -323,48 +1048,83 @@ app.controller('ordersController',
 
         $scope.chooseDate = function(date) {
             $scope.selectedDate = date;
+            $scope.clearStyle(1);
+            if (date === '')
+                $scope.side[5] = 'background-color: #E0E0E0';
+            else
+                $scope.side[4] = 'background-color: #E0E0E0';
+
         }
 
         $scope.chooseType = function(type) {
             $scope.selectedType = type;
+            $scope.clearStyle(2);
+            if (type === 'Credit Card')
+                $scope.side[6] = 'background-color: #E0E0E0';
+            if (type === 'Bank Account')
+                $scope.side[7] = 'background-color: #E0E0E0';
+            if (type === '')
+                $scope.side[8] = 'background-color: #E0E0E0';
         }
 
         $scope.chooseStatus = function(status) {
             $scope.selectedStatus = status;
+            $scope.clearStyle(0);
+            if (status === 'Pending')
+                $scope.side[0] = 'background-color: #E0E0E0';
+            if (status === 'Accepted')
+                $scope.side[1] = 'background-color: #E0E0E0';
+            if (status === 'Rejected')
+                $scope.side[2] = 'background-color: #E0E0E0';
+            if (status === '')
+                $scope.side[3] = 'background-color: #E0E0E0';
         }
 
-        $scope.showDetails = function (id) {
+        $scope.showDetails = function (id, ev) {
             if (confirm("You are accessing sensitive user data, your action will be logged.")) {
                 
                 var selectedOrder = $filter('filter')($scope.orders, { trackId: id })[0];
                 $scope.logging(selectedOrder, $scope.user);
                 sessionStorage.setItem('selectedOrder', JSON.stringify(selectedOrder));
+                //$scope.details(ev);
                 details = window.open('details.html');
             }
         }
-
-        $scope.acceptSelected = function() {
-            for (i = 0; i < $scope.orders.length; i++) {
-                if ($scope.orders[i].selected) {
-                    $scope.orders[i].status = 'Accepted';
-                    $scope.orders[i].selected = false;
+            
+        $scope.acceptSelected = function (id) {
+            if (id === 'batch') {
+                for (i = 0; i < $scope.orders.length; i++) {
+                    if ($scope.orders[i].selected) {
+                        $scope.orders[i].status = 'Accepted';
+                        $scope.orders[i].selected = false;
+                    }
+                }
+            } else {
+                for (i = 0; i < $scope.orders.length; i++) {
+                    if ($scope.orders[i].trackId === id) {
+                        $scope.orders[i].status = 'Accepted';
+                        break;
+                    }
                 }
             }
             sessionStorage.setItem('orders', JSON.stringify($scope.orders));
             $scope.bool = false;
+            $scope.updateBadge();
+            $scope.changesDialog();
         }
 
-        $scope.rejectSelected = function(reason) {
+        $scope.rejectSelected = function (id) {
+            $scope.changesDialog();
             for (i = 0; i < $scope.orders.length; i++) {
-                if ($scope.orders[i].selected) {
+                if ($scope.orders[i].trackId === id) {
                     $scope.orders[i].status = 'Rejected';
-                    $scope.orders[i].selected = false;
+                    break;
                 }
             }
             sessionStorage.setItem('orders', JSON.stringify($scope.orders));
             $scope.bool = false;
+            
         }
-
         
         $scope.logging = function (order, user) {
 
@@ -384,7 +1144,35 @@ app.controller('ordersController',
             
             sessionStorage.setItem('orderLog', JSON.stringify($scope.orderLog));
         }
+
+        $scope.changesDialog = function() {
+            Materialize.toast('Changes Applied', 4000);
+        };
+
+        $scope.clearStyle = function(group) {
+            switch (group) {
+                case 0:
+                    for (var i = 0; i < 4; i++)
+                        $scope.side[i] = '';
+                    break;
+                case 1:
+                    for (var i = 4; i < 6; i++)
+                        $scope.side[i] = '';
+                    break;
+                case 2:
+                    for (var i = 6; i < 9; i++)
+                        $scope.side[i] = '';
+                    break;
+                default:
+                    alert('error!');
+            }
+        }
         
+        $scope.clearFilters = function () {
+            $scope.selectedDate = '';
+            $scope.searchOrders = '';
+            $scope.selectedStatus = '';
+        }
 
         $scope.print = function() {
             angular.forEach($scope.filteredOrders,
@@ -393,20 +1181,65 @@ app.controller('ordersController',
                 });
         }
 
-        //for (i = 0; i < $scope.orders.length; i++) {
-        //	if ($scope.orders[i].status == 'Pending') {
-        //		$scope.countPending = 1;
-        //		$scope.countPending ++; 
-        //	}
-        //	else if ($scope.orders[i].status == 'Accepted') {
-        //		$scope.countAccepted = 1; 
-        //		$scope.countAccepted ++; 
-        //	}
-        //	else if ($scope.orders[i].status == 'Rejected') {
-        //		$scope.countRejected = 1; 
-        //		$scope.countRejected ++; 
-        //	}
-        //}
+        $scope.loadMore = function () {
+            // orders to be pushed for each scroll down
+            var step = 10;
+            var nextStep = $scope.orderIndex + step;
+            if (nextStep > $scope.orderSize) {
+                nextStep = $scope.orderSize;
+                $scope.loaded = true;
+            }
+            $scope.$apply(function() {
+                for (var i = $scope.orderIndex; i < nextStep; i++) {
+                    $scope.currentOrders.push($scope.orders[i]);
+                }
+            });
+            $scope.orderIndex = nextStep;
+            console.log('loaded');
+            
+        }
+
+        $scope.scrollToEndContainer = function (dir) {
+            $scope.loadMore();
+        };
+
+        $scope.updateBadge = function () {
+            $scope.countPending = 0;
+            for (var i = 0; i < $scope.orders.length; i++) {
+        	if ($scope.orders[i].status === 'Pending') 
+        		$scope.countPending ++;        	
+            }
+        }
+        $scope.updateBadge();
+
+        $scope.details = function (ev) {
+
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'dialogs/details.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            }).then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        }
+
+        function DialogController($scope, $mdDialog) {
+            $scope.hide = function () {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+
+            $scope.answer = function (answer) {
+                $mdDialog.hide(answer);
+            };
+        }
 
     }
 ]);
@@ -430,6 +1263,46 @@ app.controller('detailsController', ['$scope', function($scope) {
     }
 
 }]);
+
+
+app.controller('adminController',
+[
+    '$scope', '$mdDialog', function ($scope, $mdDialog) {
+        $scope.theme = 'blue-grey';
+
+        var newKeyPropt = '';
+        $scope.newKey = function(ev) {
+
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'dialogs/newKey.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+            $scope.status = 'You cancelled the dialog.';
+            });
+        }
+
+        function DialogController($scope, $mdDialog) {
+            $scope.hide = function () {
+                $mdDialog.hide();
+            };
+
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+
+            $scope.answer = function (answer) {
+                $mdDialog.hide(answer);
+            };
+        }
+    }
+]);
 
 
 // Filter orders by date
@@ -489,8 +1362,7 @@ app.filter('filterPending', function() {
 	return function(input) {
 		var orders = [];
 		angular.forEach(input, function(obj) {
-			var date = Date.parse(obj.date);
-			if (obj.status == 'Pending') {
+			if (obj.status === 'Pending') {
 				orders.push(obj);
 			}
 		});
@@ -502,8 +1374,7 @@ app.filter('filterRejected', function() {
 	return function(input) {
 		var orders = [];
 		angular.forEach(input, function(obj) {
-			var date = Date.parse(obj.date);
-			if (obj.status == 'Rejected') {
+			if (obj.status === 'Rejected') {
 				orders.push(obj);
 			}
 		});
@@ -515,8 +1386,7 @@ app.filter('filterAccepted', function() {
 	return function(input) {
 		var orders = [];
 		angular.forEach(input, function(obj) {
-			var date = Date.parse(obj.date);
-			if (obj.status == 'Accepted') {
+			if (obj.status === 'Accepted') {
 				orders.push(obj);
 			}
 		});
@@ -524,21 +1394,6 @@ app.filter('filterAccepted', function() {
 	};
 });
 
-app.filter('searchText', function () {
-    return function (input, searchOrdersFilter) {
-        if (searchOrdersFilter === '') {
-            return input;
-        }
-        else {
-            var orders = [];
-
-
-
-            currentOrders.filter()
-            return orders;
-        }
-    };
-});
 
 
 // Load jQuery for MaterializeCss elements
@@ -546,7 +1401,7 @@ $(document).ready(function() {
 	$(".dropdown-button").dropdown();
 	$(".button-collapse").sideNav();
 	$('select').material_select();
-	$('.collapsible').collapsible();
+	
 	var $input = $('.datepicker').pickadate({
 		format: 'yyyy/mm/dd',
 	    selectMonths: true, // Creates a dropdown to control month

@@ -3,6 +3,12 @@ body {
 	padding: 0;
 }
 
+.main {
+    
+    /*margin: 0 5% 0 0;
+    width: 95%;*/
+}
+
 .align-right {
 	float: right;
 }
@@ -15,9 +21,37 @@ body {
 .dropdown-button {
 	margin-right: 30px;
 }
+.main-nav {
+    position: fixed;
+}
+
+header, main, footer {
+  padding-left: 250px;
+}
+.side-nav {
+	margin-top: 65px;
+    margin-left: 0;
+    width: 250px;
+    z-index: 1;
+}
+.side-nav-title a {
+	
+	font-weight: bold;
+	font-size: 20px;
+}
 
 
 /* Table */
+
+tr {
+    /*width: 100%;*/  
+}
+.order-table {
+    margin: 0!important;
+    padding: 0 5px!important;
+    
+}
+
 .filters {
     /*margin:20px 0 20px 0!important;
     padding: 0!important;*/
@@ -62,6 +96,7 @@ body {
 table th a {
 	color: #000000;
 }
+
 table .selector {
 	padding-top: 16px;
 	line-height: 10px;
@@ -69,7 +104,27 @@ table .selector {
 }
 
 table .status {
-    width: 100px;
+    width: 80px;
+}
+
+table .number {
+    width: 15%;
+    min-width: 120px;
+}
+
+table .name {
+    width: 15%;
+    min-width: 160px;
+}
+
+table .date {
+    width: 15%;
+    min-width: 120px;
+}
+
+table .type {
+    width: 15%;
+    min-width: 120px;
 }
 
 .badge {
@@ -88,6 +143,25 @@ table .status {
     max-width: 160px;
 }
 
+td, th {
+    /*padding: 5px 5px 5px 5px!important;*/
+}
+
+.order-table
+{
+    display: block;
+}
+
+.order-table-body
+{
+   overflow: auto;
+   height: 73vh;
+}
+
+.form-control {
+    margin-bottom: 0;
+}
+
 /* Order Details */
 .order-details {
 	margin-left: 15px;
@@ -96,11 +170,6 @@ table .status {
 .order-details p {
 	display: inline-block;
 	font-size: 18px;
-}
-
-.main {
-    margin: 0 5%;
-    width: 90%;
 }
 
 .order-para {
@@ -127,8 +196,6 @@ table .status {
   	margin-left: 0;
   }
 
-
-  
 }
 
 .inline {

@@ -1,0 +1,84 @@
+﻿<md-dialog aria-label="Import New Public Key">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Order Details</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="../img/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="card-panel">
+                    <h5>User Info:</h5>
+                    <ul>
+                        <li>
+                            <strong>Name: &nbsp;</strong>
+                            <p>{{selectedOrder.customerName}}</p>
+                        </li>
+                        <li>
+                            <strong>Date: &nbsp;</strong>
+                            <p>{{selectedOrder.date | date:'yyyy/MM/dd'}}</p>
+                        </li>
+                    </ul>
+                    <br />
+                    <br />
+                    <br />
+                    <h5>
+                        Account Info:
+                    </h5>
+                    <ul>
+                        <li>
+                            <strong>Credit Card #: &nbsp;</strong>
+                            <p>{{selectedOrder.credit}}</p>
+
+                        </li>
+
+                        <li>
+                            <strong>Expiry Date: &nbsp;</strong>
+                            <p>{{selectedOrder.expiry}}</p>
+                        </li>
+                        <li>
+                            <strong>Credit Card Type: &nbsp;</strong>
+                            <p>{{selectedOrder.type}}</p>
+                        </li>
+                    </ul>
+                    <br><br><br>
+
+                    <h5>Address:</h5>
+                    <ul>
+                        <li>
+                            <strong>Address Line1: &nbsp;</strong>
+                            <p>{{selectedOrder.address}}</p>
+                        </li>
+                        <li>
+                            <strong>City: </strong>
+                            <p>{{selectedOrder.city}}, {{selectedOrder.province}}</p>
+                        </li>
+                        <li>
+                            <strong>Postal Code: &nbsp;</strong>
+                            <p>{{selectedOrder.postalCode}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            
+            <span flex></span>
+            <md-button ng-click="acceptSelected(selectedOrder.trackId)">
+                Accept
+            </md-button>
+            <md-button ng-click="rejectSelected(selectedOrder.trackId)">
+                Reject
+            </md-button>
+            <md-button>
+                Close
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

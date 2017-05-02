@@ -4,21 +4,21 @@
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Order Details - Merchant Portal </title>
-  <link rel="shortcut icon" href=""/>
+  <link rel="shortcut icon" href="http://www.dh.com/profiles/dh/themes/dh_theme/favicon.ico"/>
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet" >
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../styles/details.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
-    <script src="../scripts/dirPagination.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="../scripts/scrollToEnd.js"></script>
     <script src="../scripts/app.js"></script>
-    <script language="javascript">
 
-  
-      
-    </script> 
 </head>
 <body ng-app="merchantPortalApp" >
 
@@ -57,7 +57,13 @@
       <!-- Page Controls -->
       <div class="row">
         <a class="waves-effect waves-light btn" ng-click="close()"><i class="material-icons left">arrow_back</i>Close</a>
-        <a class="waves-effect waves-light btn"><i class="material-icons right">file_download</i>Download</a>
+          <a class="btn green inline-btn"><i class="material-icons right">thumb_up</i>Accept</a>
+          <a class="waves-effect waves-light dropdown-button btn red inline-btn" data-activates='details' data-dropup="true"><i class="material-icons right">block</i>Reject</a>
+          <ul id='details' class='dropdown-content'>
+              <li><a href="#" ng-click="">Incorrect Account number</a></li>
+              <li><a href="#" ng-click="">Unable to locate customer on file</a></li>
+              <li><a href="#" ng-click="">Contact Biller Directly</a></li>
+          </ul>
       </div> <!-- End Page Controls -->
       <!-- Order Details -->
         <div class="card-panel">
@@ -91,11 +97,6 @@
                     <strong>Credit Card Type: &nbsp;</strong>
                     <p>{{selectedOrder.type}}</p>
                 </li>
-                <li>
-                    
-                    <strong>Secure Track #: &nbsp;</strong>
-                    <p>{{selectedOrder.trackId}}</p>
-                </li>
             </ul>
             <br><br><br>
 
@@ -117,7 +118,7 @@
         </div> <!-- End Order Details -->
       
         
-        </footer>
+        
     </main> <!-- End Content -->
 
   </div>
